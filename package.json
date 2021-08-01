@@ -1,0 +1,54 @@
+{
+  "name": "sourced-repo-svelte-local-storage-store",
+  "version": "0.0.0-development",
+  "description": "sourced-repo-svelte-local-storage-store",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "babel src -d dist",
+    "lint": "eslint src __tests__ --ext=.js,.mjs",
+    "lint:fix": "eslint --fix src __tests__ --ext=.js,.mjs",
+    "test": "DEBUG=tests jest --no-cache --config ./jest.json --coverage --verbose",
+    "test:watch": "DEBUG=tests jest --config jest.json --watch --coverage --verbose",
+    "prepare": "husky install",
+    "semantic-release": "semantic-release"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CloudNativeEntrepreneur/sourced-repo-svelte-local-storage-store.git"
+  },
+  "keywords": [
+    "cloudevents"
+  ],
+  "author": "Patrick Lee Scott",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CloudNativeEntrepreneur/sourced-repo-svelte-local-storage-store/issues"
+  },
+  "homepage": "https://github.com/CloudNativeEntrepreneur/sourced-repo-svelte-local-storage-store#readme",
+  "dependencies": {
+    "@babel/runtime": "7.14.8",
+    "debug": "4.3.2",
+    "eventemitter3": "4.0.7",
+    "svelte": "3.x",
+    "svelte-local-storage-store": "0.2.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.14.8",
+    "@babel/plugin-transform-runtime": "7.14.5",
+    "@babel/preset-env": "7.14.8",
+    "eslint": "7.31.0",
+    "eslint-config-standard": "16.0.3",
+    "eslint-plugin-import": "2.23.4",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "5.1.0",
+    "eslint-plugin-standard": "4.1.0",
+    "husky": "7.0.1",
+    "jest": "27.0.6",
+    "lint-staged": "11.1.1",
+    "semantic-release": "17.4.4"
+  },
+  "peerDependencies": {
+    "svelte": "3.x",
+    "eventemitter3": "4.x"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "roots": ["<rootDir>/src", "<rootDir>/__tests__/unit"],
+  "testEnvironment": "node",
+  "modulePaths": [
+    "<rootDir>/src"
+  ],
+  "moduleDirectories": [
+    "node_modules"
+  ],
+  "moduleFileExtensions": [
+    "js",
+    "mjs"
+  ],
+  "transform": {
+    "^.+\\.m?js$": "babel-jest"
+  },
+  "coverageThreshold": {
+    "global": {
+      "branches": 100,
+      "functions": 100,
+      "lines": 100,
+      "statements": 100
+    }
+  },
+  "collectCoverageFrom" : [
+    "src/**/*.{js,jsx,mjs}"
+  ],
+  "testTimeout": 30000
+}  
+  

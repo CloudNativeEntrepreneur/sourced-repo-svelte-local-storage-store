@@ -1,0 +1,25 @@
+{
+  "env": {
+    "node": true
+  },
+  "extends": [
+    "standard"
+  ],
+  "globals": {
+      "gql": true,
+      "ga": true,
+      "describe": true,
+      "it": true,
+      "test": true,
+      "expect": true,
+      "jest": true,
+      "beforeEach": true,
+      "afterEach": true,
+      "jasmine": true,
+      "beforeAll": true,
+      "afterAll": true
+  },
+  "rules": {
+    "spaced-comment": 0
+  }
+}
