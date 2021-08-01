@@ -6,7 +6,7 @@ const { EventEmitter } = events
 const log = console.log
 
 export class Repository extends EventEmitter {
-  constructor(
+  constructor (
     EntityType,
     options = {
       indices: [],
@@ -37,7 +37,7 @@ export class Repository extends EventEmitter {
     this.emit('ready')
   }
 
-  async commit(entity) {
+  async commit (entity) {
     return new Promise(async (resolve, reject) => {
       log(`committing ${this.EntityType.name} for id ${entity.id}`)
 
@@ -60,20 +60,21 @@ export class Repository extends EventEmitter {
     })
   }
 
-  get(id, cb) {
+  get (id, cb) {
     return this._getByIndex('id', id, cb)
   }
 
-  _getByIndex(index, value, cb) {
+  _getByIndex (index, value, cb) {
     const self = this
 
     return new Promise((resolve, reject) => {
-      if (this.indices.indexOf(index) === -1)
+      if (this.indices.indexOf(index) === -1) {
         throw new Error(
           'Cannot get sourced entity type [%s] by index [%s]',
           this.EntityType,
           index
         )
+      }
 
       log(`getting ${this.EntityType.name} where "${index}" is "${value}"`)
 
@@ -102,7 +103,7 @@ export class Repository extends EventEmitter {
     })
   }
 
-  _commitEvents(entity) {
+  _commitEvents (entity) {
     return new Promise((resolve, reject) => {
       if (entity.newEvents.length === 0) return resolve()
 
@@ -130,7 +131,7 @@ export class Repository extends EventEmitter {
     })
   }
 
-  _commitSnapshots(entity) {
+  _commitSnapshots (entity) {
     const self = this
 
     return new Promise((resolve, reject) => {
@@ -157,14 +158,14 @@ export class Repository extends EventEmitter {
     })
   }
 
-  _deserialize(id, snapshot, events) {
+  _deserialize (id, snapshot, events) {
     log('deserializing %s entity ', this.EntityType.name)
     const entity = new this.EntityType(snapshot, events)
     entity.id = id
     return entity
   }
 
-  _emitEvents(entity) {
+  _emitEvents (entity) {
     log('emitting events')
     const self = this
 
