@@ -66,14 +66,6 @@ export class Repository extends EventEmitter {
     const self = this
 
     return new Promise((resolve, reject) => {
-      if (this.indices.indexOf(index) === -1) {
-        throw new Error(
-          'Cannot get sourced entity type [%s] by index [%s]',
-          this.EntityType,
-          index
-        )
-      }
-
       log(`getting ${this.EntityType.name} where "${index}" is "${value}"`)
 
       const allSnapshots = get(this.snapshots)

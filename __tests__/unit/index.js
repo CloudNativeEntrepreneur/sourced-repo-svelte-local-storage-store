@@ -28,6 +28,26 @@ describe('sourced-repo-svelte-local-storage-store', () => {
     expect(repo.get).toBeDefined
     expect(repo.commit).toBeDefined
 
+    let empty = await repo.get()
+    expect(empty).toEqual(null)
+
+    let noevents = new Example()
+    await repo.commit(noevents)
+
+    let noId = new Example()
+    noId.increment()
+    try {
+      await repo.commit(noId)
+    } catch (err) {
+      expect(err).toBeDefined()
+    }
+
+    try {
+      await repo.get('does-not-exist')
+    } catch (err) {
+      expect(err).toBeDefined()
+    }
+
     const example = new Example()
     example.init('test-1')
     example.increment()
