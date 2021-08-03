@@ -2,17 +2,17 @@ import { Repository } from 'index'
 import { Entity } from 'sourced'
 
 class Example extends Entity {
-  constructor(snapshot, events) {
+  constructor (snapshot, events) {
     super()
     this.value = 0
     this.rehydrate(snapshot, events)
   }
 
-  init(id) {
+  init (id) {
     this.id = id
   }
 
-  increment() {
+  increment () {
     this.value++
     this.digest('increment')
     this.enqueue('incremented', this)
@@ -25,16 +25,16 @@ describe('sourced-repo-svelte-local-storage-store', () => {
 
     const repo = new Repository(Example)
 
-    expect(repo.get).toBeDefined
-    expect(repo.commit).toBeDefined
+    expect(repo.get).toBeDefined()
+    expect(repo.commit).toBeDefined()
 
-    let empty = await repo.get()
+    const empty = await repo.get()
     expect(empty).toEqual(null)
 
-    let noevents = new Example()
+    const noevents = new Example()
     await repo.commit(noevents)
 
-    let noId = new Example()
+    const noId = new Example()
     noId.increment()
     try {
       await repo.commit(noId)
@@ -52,7 +52,7 @@ describe('sourced-repo-svelte-local-storage-store', () => {
     example.init('test-1')
     example.increment()
     expect(example.value).toEqual(1)
-    
+
     let x = 0
     while (x < 20) {
       example.increment()
@@ -61,8 +61,7 @@ describe('sourced-repo-svelte-local-storage-store', () => {
 
     await repo.commit(example)
 
-    let test1 = await repo.get('test-1')
+    const test1 = await repo.get('test-1')
     expect(test1.value).toEqual(21)
-
   })
 })
