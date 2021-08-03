@@ -8,6 +8,10 @@ class Example extends Entity {
     this.rehydrate(snapshot, events)
   }
 
+  init(id) {
+    this.id = id
+  }
+
   increment() {
     this.value++
     this.digest('increment')
@@ -16,12 +20,29 @@ class Example extends Entity {
 }
 
 describe('sourced-repo-svelte-local-storage-store', () => {
-  it('should exist', () => {
+  it('should exist', async () => {
     expect(Repository).toBeDefined()
 
     const repo = new Repository(Example)
 
     expect(repo.get).toBeDefined
     expect(repo.commit).toBeDefined
+
+    const example = new Example()
+    example.init('test-1')
+    example.increment()
+    expect(example.value).toEqual(1)
+    
+    let x = 0
+    while (x < 20) {
+      example.increment()
+      x++
+    }
+
+    await repo.commit(example)
+
+    let test1 = await repo.get('test-1')
+    expect(test1.value).toEqual(21)
+
   })
 })
