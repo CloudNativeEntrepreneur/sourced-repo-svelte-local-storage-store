@@ -47,7 +47,7 @@
     "jest": "27.0.6",
     "lint-staged": "11.1.1",
     "semantic-release": "17.4.4",
-    "sourced": "^3.0.1"
+    "sourced": "3.0.1"
   },
   "peerDependencies": {
     "svelte": "3.x"
