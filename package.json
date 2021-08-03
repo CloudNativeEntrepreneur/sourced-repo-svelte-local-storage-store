@@ -3,6 +3,7 @@
   "version": "0.0.0-development",
   "description": "sourced-repo-svelte-local-storage-store",
   "main": "dist/index.js",
+  "svelte": "src/index.js",
   "scripts": {
     "build": "babel src -d dist",
     "lint": "eslint src __tests__ --ext=.js,.mjs",
@@ -45,10 +46,10 @@
     "husky": "7.0.1",
     "jest": "27.0.6",
     "lint-staged": "11.1.1",
-    "semantic-release": "17.4.4"
+    "semantic-release": "17.4.4",
+    "sourced": "^3.0.1"
   },
   "peerDependencies": {
-    "svelte": "3.x",
-    "eventemitter3": "4.x"
+    "svelte": "3.x"
   }
 }

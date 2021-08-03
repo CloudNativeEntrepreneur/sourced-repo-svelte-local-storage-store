@@ -20,7 +20,6 @@
       "afterAll": true
   },
   "rules": {
-    "spaced-comment": 0,
-    "no-async-promise-executor": "off"
+    "spaced-comment": 0
   }
 }

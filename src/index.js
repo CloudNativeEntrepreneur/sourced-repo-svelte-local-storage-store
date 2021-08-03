@@ -38,26 +38,24 @@ export class Repository extends EventEmitter {
   }
 
   async commit (entity) {
-    return new Promise(async (resolve, reject) => {
-      log(`committing ${this.EntityType.name} for id ${entity.id}`)
+    log(`committing ${this.EntityType.name} for id ${entity.id}`)
 
-      try {
-        await this._commitEvents(entity)
-      } catch (err) {
-        console.error(err)
-        return reject(err)
-      }
+    try {
+      await this._commitEvents(entity)
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
 
-      try {
-        await this._commitSnapshots(entity)
-      } catch (err) {
-        console.error(err)
-        return reject(err)
-      }
+    try {
+      await this._commitSnapshots(entity)
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
 
-      this._emitEvents(entity)
-      return resolve(this)
-    })
+    this._emitEvents(entity)
+    return this
   }
 
   get (id, cb) {
