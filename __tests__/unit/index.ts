@@ -31,18 +31,18 @@ describe("sourced-repo-svelte-local-storage-store", () => {
     expect(repo.commit).toBeDefined();
 
     const noevents = new Example();
-    await repo.commit(noevents);
+    repo.commit(noevents);
 
     const noId = new Example();
     noId.increment();
     try {
-      await repo.commit(noId);
+      repo.commit(noId);
     } catch (err) {
       expect(err).toBeDefined();
     }
 
     try {
-      await repo.get("does-not-exist");
+      repo.get("does-not-exist");
     } catch (err) {
       expect(err).toBeDefined();
     }
@@ -58,7 +58,7 @@ describe("sourced-repo-svelte-local-storage-store", () => {
       x++;
     }
 
-    await repo.commit(example);
+    repo.commit(example);
 
     const test1 = (await repo.get("test-1")) as Example;
     expect(test1.value).toEqual(21);
