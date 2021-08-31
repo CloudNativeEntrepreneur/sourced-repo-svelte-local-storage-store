@@ -1,6 +1,3 @@
 import { Repository, RepositoryOptions } from "./Repository";
 
-export {
-  Repository,
-  RepositoryOptions
-}
+export { Repository, RepositoryOptions };
