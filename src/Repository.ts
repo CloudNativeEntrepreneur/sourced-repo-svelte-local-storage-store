@@ -1,16 +1,30 @@
-import events from 'eventemitter3'
+import { EventEmitter } from 'eventemitter3'
 import { get } from 'svelte/store'
 import { writable as writeableWithLocalStorage } from 'svelte-local-storage-store'
 
-const { EventEmitter } = events
 const log = console.log
 
+export interface RepositoryOptions {
+  indices: string[];
+  forceSnapshot: boolean;
+  snapshotFrequency: number;
+}
+
 export class Repository extends EventEmitter {
+  EntityType: any
+  options: RepositoryOptions
+  indices: string[];
+  forceSnapshot: boolean;
+  snapshotFrequency: number;
+  events: any
+  snapshots: any
+  
   constructor (
     EntityType,
     options = {
       indices: [],
-      forceSnapshot: false
+      forceSnapshot: false,
+      snapshotFrequency: 10,
     }
   ) {
     super()
@@ -19,7 +33,7 @@ export class Repository extends EventEmitter {
 
     this.EntityType = EntityType
     this.indices = indices
-    this.snapshotFrequency = options.snapshotFrequency || 10
+    this.snapshotFrequency = options.snapshotFrequency
     this.forceSnapshot = options.forceSnapshot
 
     // snapshot store setup
@@ -58,26 +72,26 @@ export class Repository extends EventEmitter {
     return this
   }
 
-  get (id, cb) {
-    return this._getByIndex('id', id, cb)
+  get (id) {
+    return this._getByIndex('id', id)
   }
 
-  _getByIndex (index, value, cb) {
+  _getByIndex (index, value) {
     const self = this
 
     return new Promise((resolve, reject) => {
       log(`getting ${this.EntityType.name} where "${index}" is "${value}"`)
 
-      const allSnapshots = get(this.snapshots)
+      const allSnapshots: unknown[] = get(this.snapshots) as any[]
       const snapshots = allSnapshots.filter(
         (snapshot) => snapshot[index] === value
       )
-      const snapshot = snapshots[0]
+      const snapshot: any = snapshots[0]
 
-      const allEvents = get(this.events)
-      const events = allEvents
-        .filter((event) => event[index] === value)
-        .filter((event) => (snapshot ? event.version > snapshot.version : true))
+      const allEvents: unknown[] = get(this.events) as any[]
+      const events: any[] = allEvents
+        .filter((event: any) => event[index] === value)
+        .filter((event: any) => (snapshot ? event.version > snapshot.version : true))
 
       log({ snapshots, snapshot, events })
 
@@ -95,7 +109,7 @@ export class Repository extends EventEmitter {
 
   _commitEvents (entity) {
     return new Promise((resolve, reject) => {
-      if (entity.newEvents.length === 0) return resolve()
+      if (entity.newEvents.length === 0) return resolve(null)
 
       if (!entity.id) {
         return reject(
