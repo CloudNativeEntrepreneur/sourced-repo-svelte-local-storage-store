@@ -1,8 +1,10 @@
-import { Repository } from 'index'
+import { Repository } from '../../src/index'
 import { Entity } from 'sourced'
 
 class Example extends Entity {
-  constructor (snapshot, events) {
+  id: string
+  value: number
+  constructor (snapshot?: any, events?: any) {
     super()
     this.value = 0
     this.rehydrate(snapshot, events)
@@ -14,7 +16,7 @@ class Example extends Entity {
 
   increment () {
     this.value++
-    this.digest('increment')
+    this.digest('increment', {})
     this.enqueue('incremented', this)
   }
 }
@@ -27,9 +29,6 @@ describe('sourced-repo-svelte-local-storage-store', () => {
 
     expect(repo.get).toBeDefined()
     expect(repo.commit).toBeDefined()
-
-    const empty = await repo.get()
-    expect(empty).toEqual(null)
 
     const noevents = new Example()
     await repo.commit(noevents)
@@ -61,7 +60,7 @@ describe('sourced-repo-svelte-local-storage-store', () => {
 
     await repo.commit(example)
 
-    const test1 = await repo.get('test-1')
+    const test1 = await repo.get('test-1') as Example
     expect(test1.value).toEqual(21)
   })
 })
