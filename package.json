@@ -35,7 +35,7 @@
     "svelte-local-storage-store": "0.2.4"
   },
   "devDependencies": {
-    "@commitlint/cli": "13.2.0",
+    "@commitlint/cli": "13.2.1",
     "@commitlint/config-conventional": "13.2.0",
     "@types/debug": "4.1.7",
     "@types/jest": "27.0.2",
