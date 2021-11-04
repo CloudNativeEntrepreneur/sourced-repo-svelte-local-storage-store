@@ -31,7 +31,7 @@
     "debug": "4.3.2",
     "eventemitter3": "4.0.7",
     "svelte": "3.x",
-    "svelte-local-storage-store": "0.2.4"
+    "svelte-local-storage-store": "0.2.6"
   },
   "devDependencies": {
     "@commitlint/cli": "14.1.0",
