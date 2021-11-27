@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/CloudNativeEntrepreneur/sourced-repo-svelte-local-storage-store#readme",
   "dependencies": {
-    "debug": "4.3.2",
+    "debug": "4.3.3",
     "eventemitter3": "4.0.7",
     "svelte": "3.x",
     "svelte-local-storage-store": "0.2.6"
