@@ -52,7 +52,7 @@
     "semantic-release": "19.0.5",
     "ts-jest": "27.1.5",
     "typescript": "4.8.4",
-    "sourced": "4.0.6"
+    "sourced": "4.0.7"
   },
   "peerDependencies": {
     "svelte": "3.x"
